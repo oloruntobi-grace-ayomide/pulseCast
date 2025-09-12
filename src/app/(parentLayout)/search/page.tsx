@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { usePathname, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useData } from "@/lib/DataContext";
 import { NewsData } from '@/lib/api';
@@ -30,7 +30,7 @@ export default function SearchPage() {
       saveToHistory(urlQuery);
     }
   }, [searchParams, query, updateSearch]);
-
+  
   // Save search to history
   const saveToHistory = (searchQuery: string) => {
     const filteredHistory = searchHistory.filter(item => item !== searchQuery);
@@ -78,7 +78,7 @@ export default function SearchPage() {
           {isLoading ? (
             <div className="text-center py-8">
               <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
-              <p className="mt-2 text-gray-600">Searching for "{query}"...</p>
+              <p className="mt-2 text-gray-600">{`Searching for "${query}"...`}</p>
             </div>
           ) : searchData === null ? (
             <div className="text-center text-gray-500 py-8">
@@ -97,12 +97,13 @@ export default function SearchPage() {
             </div>
           ) : searchData.length === 0 ? (
               <div className="text-center text-gray-500 py-8">
-                <p>No results found for "{query}"</p>
+                <p>{`No results found for "${query}"`}</p>
               </div>
           ) : (
             <div className="space-y-4">
               <h3 className="text-lg font-semibold">
-                {searchData.length} result{searchData.length !== 1 ? 's' : ''} found for "{query}"
+                {`${searchData.length} result${searchData.length !== 1 ? 's' : ''} found for "${query}"`}
+                
               </h3>
               {searchData.map((news: NewsData) => (
                 <div key={news.id} className="p-4 transition-shadow border rounded-lg hover:shadow-md">

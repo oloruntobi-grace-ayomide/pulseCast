@@ -1,8 +1,8 @@
 // newsCache.ts
 import { NewsData } from './DataContext';
 
-let articleCache = new Map<string, NewsData>();
-let queryCache = new Map<string, { articleIds: string[]; timestamp: number }>();
+const articleCache = new Map<string, NewsData>();
+const queryCache = new Map<string, { articleIds: string[]; timestamp: number }>();
 
 const MAX_ARTICLE_CACHE_SIZE = 500;
 const MAX_QUERY_CACHE_SIZE = 50;

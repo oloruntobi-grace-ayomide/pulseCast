@@ -23,6 +23,7 @@ export async function GET(request: NextRequest) {
     }
     return NextResponse.json(searchResults);
   } catch (error) {
+    console.error('Weather API error:', error);
     return NextResponse.json({ error: "Server error while fetching news" }, { status: 500 });
   }
 }
