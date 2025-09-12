@@ -12,6 +12,7 @@ const Navbar = () => {
     const [searchQuery, setSearchQuery] = useState("");
     const [showSuggestions, setShowSuggestions] = useState(false);
     const [suggestions, setSuggestions] = useState<string[]>([]);
+    const [selectedOption, setSelectedOption] = useState<string>("");
     const [isLoading, setIsLoading] = useState(false);
     const pathname = usePathname();
     const router = useRouter();
@@ -86,6 +87,7 @@ const Navbar = () => {
         router.push(`/search?q=${encodeURIComponent(suggestion)}`);
         setShowSuggestions(false);
         setSearchQuery(suggestion);
+        setSelectedOption(suggestion)
     };
 
     const handleInputFocus = () => {
@@ -140,6 +142,7 @@ const Navbar = () => {
                                             }
                                         }}
                                         role="option"
+                                        aria-selected={selectedOption === suggestion}
                                     >
                                         <div className="flex items-center gap-2">
                                             <TbSearch className="text-gray-400 text-sm" />
@@ -238,6 +241,7 @@ const Navbar = () => {
                                         }
                                     }}
                                     role="option"
+                                    aria-selected={selectedOption === suggestion}
                                 >
                                     <div className="flex items-center gap-2">
                                         <TbSearch className="text-gray-400 text-sm" />

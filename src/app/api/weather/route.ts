@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { fetchWeather, fetchWeatherByCoords } from "@/lib/api";
 
-let cache: { [key: string]: { data: any; timestamp: number } } = {};
+const cache: { [key: string]: { data: unknown; timestamp: number } } = {};
 
 export async function GET(request: NextRequest) {
   const searchParams = request.nextUrl.searchParams;
@@ -35,6 +35,7 @@ export async function GET(request: NextRequest) {
     
     return NextResponse.json(data);
   } catch (error) {
+    console.error('Weather API error:', error);
     return NextResponse.json({ error: "Server error while fetching weather" }, { status: 500 });
   }
 }

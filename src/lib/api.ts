@@ -1,5 +1,15 @@
 import { generateIdFromUrl } from "./hashUtils";
 
+interface NewsApiArticle {
+  title: string;
+  description: string;
+  url: string;
+  content: string;
+  source: { name: string; id: string | null };
+  urlToImage: string | null;
+  publishedAt: string;
+}
+
 interface WeatherData {
   city: string;
   temp: number;
@@ -74,6 +84,7 @@ export async function fetchWeather(city: string): Promise<WeatherData | { error:
     forecast,
   };
   } catch (error) {
+    console.error("Fetch Weather API Error:", error);
     return { error: "Network error or API unavailable. Please try again later." };
   }
 }
@@ -127,7 +138,7 @@ export async function fetchWeatherByCoords(lat: number, lon: number): Promise<We
     forecast, // Could be 3, 5, or 7 days - all real data
   };
   } catch (error) {
-    // console.error("Weather fetch error:", error);
+    console.error("Weather fetch error:", error);
     return { error: "Network error or API unavailable. Please try again later." };
   }
 }
@@ -139,6 +150,7 @@ export async function fetchCityByIP(): Promise<string | null> {
     const data = await res.json();
     return data.city || null;
   } catch (error) {
+    console.error("Fetch City bu Ip API Error:", error);
     return null;
   }
 }
@@ -156,8 +168,8 @@ export async function TopHeadlistfetchNews(source: string = ""): Promise<NewsDat
     
     const data = await res.json();
     const articles = data.articles
-      .filter((article: any) => article.title && article.description && article.url && article.content && article.url && article.source.name)
-      .map((article: any) => ({
+      .filter((article: NewsApiArticle) => article.title && article.description && article.url && article.content && article.url && article.source.name)
+      .map((article: NewsApiArticle) => ({
         id:generateIdFromUrl(article.url),
         title: article.title,
         description: article.description,
@@ -170,6 +182,7 @@ export async function TopHeadlistfetchNews(source: string = ""): Promise<NewsDat
       }));
     return articles.length >= 2 ? articles : { error: "Insufficient valid news articles available." };
   } catch (error) {
+    console.error("TopHeadlistfetchNews API Error:", error);
     return { error: "Network error or API unavailable. Please try again later." };
   }
 }
@@ -201,8 +214,8 @@ export async function AllfetchNews(
     }
     const data = await res.json(); 
     const articles = data.articles
-      .filter((article: any) => article.title && article.description && article.url && article.content && article.url && article.source.name)
-      .map((article: any) => ({
+      .filter((article: NewsApiArticle) => article.title && article.description && article.url && article.content && article.url && article.source.name)
+      .map((article: NewsApiArticle) => ({
         id:generateIdFromUrl(article.url),
         title: article.title,
         description: article.description,
@@ -215,6 +228,7 @@ export async function AllfetchNews(
       }));  
     return articles.length >= 2 ? articles : { error: "Insufficient valid news articles available." };
   } catch (error) {
+    console.error("All New API Error:", error);
     return { error: "Network error or API unavailable. Please try again later." };
   }
 }
@@ -250,8 +264,8 @@ export async function searchNews(
     const data = await res.json();
     
     const articles = data.articles
-      .filter((article: any) => article.title && article.description && article.url && article.source.name)
-      .map((article: any) => ({
+      .filter((article: NewsApiArticle) => article.title && article.description && article.url && article.source.name)
+      .map((article: NewsApiArticle) => ({
         id: generateIdFromUrl(article.url),
         title: article.title,
         description: article.description,
@@ -266,6 +280,7 @@ export async function searchNews(
     return articles.length >= 1 ? articles : { error: "No articles found" };
     
   } catch (error) {
+    console.error("Search API News Error:", error);
     return { error: "Network error or API unavailable" };
   }
 }
