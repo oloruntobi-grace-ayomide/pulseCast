@@ -9,7 +9,7 @@ interface PageProps {
 
 async function getNewsArticle(id: string) {
   try {
-    const baseUrl = process.env.NEXTAUTH_URL || 'http://localhost:3000';
+    const baseUrl = process.env.VERCEL_URL ? process.env.VERCEL_URL : 'http://localhost:3000';
     const res = await fetch(`${baseUrl}/api/news/${id}`, {
       next: { 
         revalidate: 300,
