@@ -4,7 +4,7 @@ import { DataProvider } from "@/lib/DataContext";
 import GeolocationHandler from "@/components/GeolocationHandler";
 import { TopHeadlistfetchNews } from '@/lib/api';
 
-export const metaData = {
+export const metadata = {
   title:{
     default:"PulseCast - News and Weather Updates",
     template:"%s | PulseCast - News and Weather Updates"
@@ -18,12 +18,12 @@ export const metaData = {
     ],
     apple: "/favicon/apple-touch-icon.png",
   },
-  minifest: "/favicon/site.webmanifest",
+  manifest: "/favicon/site.webmanifest",
   // Open Graph and twitter for social sharing
   openGraph: {
-    title: "Weather + News App",
+    title: "PulseCast - Weather and News Updates",
     description: "Get personalized weather updates and trending news in one place.",
-    url: "#",
+    url: "https://pulse-cast-pi.vercel.app/",
     siteName: "PulseCast",
     images: [
     {
