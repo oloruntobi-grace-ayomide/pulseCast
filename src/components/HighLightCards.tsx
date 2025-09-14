@@ -104,7 +104,7 @@ export default function HighlightCards() {
                         {weatherData.alert || "Expect clear skies today!"}
                     </p>
                     <Link href="/weather" className="inline-block mt-1 sm:text-sm xxsm:text-[12.3px] font-medium text-cyan-300 hover:underline">
-                        See details
+                        Check Weekly Weather
                     </Link>
                 </CardContent>
             )}
