@@ -76,7 +76,7 @@ export default function WeatherPage() {
                 
                 <CardContent className="flex flex-col items-center justify-center text-center mt-[10px]">
                     <div className="flex items-center gap-2">
-                        <form onSubmit={handleCitySubmit} className="font-medium text-[#708090] bg-white rounded-[15px] py-[10px] px-[10px] my-[5px] min-w-[350px] w-fit flex items-center justify-between">
+                        <form onSubmit={handleCitySubmit} className="font-medium text-[#708090] bg-white rounded-[15px] py-[10px] px-[10px] my-[5px] sm:min-w-[350px] min-w-[60%] w-fit flex items-center justify-between">
                             <input
                                 type="text"
                                 value={city}
